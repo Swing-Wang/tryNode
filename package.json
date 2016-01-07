@@ -1,0 +1,9 @@
+{
+	"name":"tryNode",
+	"version":"0.0.1",
+	"description":"tryNode",
+	"dependencies":{
+		"socket.io":"~0.9.6",
+		"mime":"~1.2.7"
+	}
+}
