@@ -8,9 +8,8 @@ var cache = {};
 
 function send404(response){
  
-	response.writeHead(404,{'Content-Type':'text/html'});
-    console.log("Being 404")
-	response.write("BEEEEEEEEEEEE");
+	response.writeHead(404,{'Content-Type':'text/plain'});
+    response.write("Error:not found");
 	response.end();
 }
 
@@ -28,8 +27,9 @@ function serveStatic(response,cache,absPath){
 	}else{
 		fs.readFile(absPath,function(err,data){
 			if(err)
+				{ 
 				send404(response);  //404 Error
-			else{
+			}else{
 				cache[absPath] = data;  // add to cache
 				sendFile(response,absPath,data); //send 
 			}
@@ -38,7 +38,7 @@ function serveStatic(response,cache,absPath){
 }
 
 var server = http.createServer(function(request,response){
-	var filePath = false;
+	var filePath ;
 	if(request.url=="/"){
 		filePath = "public/index.html";
 	}else{
