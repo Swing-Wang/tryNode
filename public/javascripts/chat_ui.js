@@ -7,8 +7,9 @@ function divSystemContentElement(message){
 }
 
 function processUserInput(chatApp,socket){
+	 
 	var message = $('#send-message').val();
-	console.log("刚刚输入的是：" + message);
+	 
 	var systemMessage;
 
 	if(message.charAt(0) == '/'){
@@ -17,6 +18,7 @@ function processUserInput(chatApp,socket){
 			$("#messages").append(divEscapedContentElement(message));
 		}
 		}else{
+
 			chatApp.sendMessage($("#room").text(),message);
 			$("#message").scrollTop($("#messages").prop("scrollheight"));
 		}
@@ -24,8 +26,10 @@ function processUserInput(chatApp,socket){
 	}
 
 	var socket = io.connect();
+
 	$(document).ready(function(){
 		var chatApp = new chat(socket);
+
 		socket.on('nameResult',function(result){
 			var message;
 			if(result.success){
@@ -35,10 +39,12 @@ function processUserInput(chatApp,socket){
 			}
 			$("#message").append(divSystemContentElement(message));
 		});
+
 		socket.on('message',function(message){
 			var newElement = $("<div></div>").text(message.text);
 			$('messages').append(newElement);
 		});
+
 		socket.on("rooms",function(rooms){
 			$("#room-list").empty();
 
@@ -53,11 +59,15 @@ function processUserInput(chatApp,socket){
 				$("#send-message").focus();
 			});
 		});
+
 		setInterval(function(){
 			socket.emit("rooms");
 		},1000);
+
 		$("#send-message").focus();
+
 		$("#send-form").submit(function(){
+
 			processUserInput(chatApp,socket);
 			return false;
 		});

@@ -7,7 +7,7 @@ chat.prototype.sendMessage = function(room,text){
 		room:room,
 		text:text
 	};
-	this.scoket.emit('join',{
+	this.socket.emit('join',{
 		newRoom:room
 	});
 };
