@@ -7,7 +7,6 @@ var chatServer = require("./lib/chat_server");
 var cache = {};
 
 function send404(response){
- 
 	response.writeHead(404,{'Content-Type':'text/plain'});
     response.write("Error:not found");
 	response.end();
@@ -19,6 +18,7 @@ function sendFile(response,filePath,fileContents){
 	});
 	response.end(fileContents);
 }
+
 function serveStatic(response,cache,absPath){
 
 	if(cache[absPath]){   //if there is cache
