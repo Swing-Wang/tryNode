@@ -15,12 +15,10 @@ function processUserInput(chatApp,socket){
 	if(message.charAt(0) == '/'){
 		systemMessage = chatApp.processCommand(message);
 		if(systemMessage){
-			alert(systemMessage)
+			  
 			$("#messages").append(divEscapedContentElement(message));
 		}
 		}else{
-			 
-
 			chatApp.sendMessage($("#room").text(),message);
 			$("#message").scrollTop($("#messages").prop("scrollheight"));
 		}
@@ -43,14 +41,16 @@ function processUserInput(chatApp,socket){
 			}
 			$("#messages").append(divSystemContentElement(message));
 		});
+
         socket.on("joinResult",function(result){
         	$('#room').text(result.room);
         	$("#messages").append(divSystemContentElement("Room Changed"));
-        })
+        });
+
 		socket.on('message',function(message){
-            alert("message.text")
+           
 			var newElement = $("<div></div>").text(message.text);
-		      alert(newElement)
+		    
 			$('#messages').append(newElement);
 		});
 
@@ -69,6 +69,7 @@ function processUserInput(chatApp,socket){
 			});
 		});
 
+
 		setInterval(function(){
 			socket.emit("rooms");
 		},1000);
@@ -76,7 +77,6 @@ function processUserInput(chatApp,socket){
 		$("#send-message").focus();
 
 		$("#send-form").submit(function(){
-
 			processUserInput(chatApp,socket);
 			return false;
 		});

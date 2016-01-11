@@ -7,13 +7,15 @@ chat.prototype.sendMessage = function(room,text){
 		room:room,
 		text:text
 	};
+ 
 	var sendM = function(message){
-            alert("message.text")
+           
 			var newElement = $("<div></div>").text(message.text);
-		      alert(newElement)
+		       
 			$('#messages').append(newElement);
-		});
-
+		};
+       
+			 
     		socket.on('message', sendM(messag));
 	 sendM(messag);
  
