@@ -3,13 +3,21 @@ var chat = function(socket){
 };
 
 chat.prototype.sendMessage = function(room,text){
-	var message = {
+	var messag = {
 		room:room,
 		text:text
 	};
-	this.socket.emit('join',{
-		newRoom:room
-	});
+	var sendM = function(message){
+            alert("message.text")
+			var newElement = $("<div></div>").text(message.text);
+		      alert(newElement)
+			$('#messages').append(newElement);
+		});
+
+    		socket.on('message', sendM(messag));
+	 sendM(messag);
+ 
+
 };
 
 chat.prototype.changeRoom = function(room,text){
